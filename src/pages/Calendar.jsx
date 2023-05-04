@@ -1,21 +1,23 @@
-import React, { useState } from 'react';
-import { ScheduleComponent, ViewsDirective, ViewDirective, Day, Week, WorkWeek, Month, Agenda, Inject, Resize, DragAndDrop } from '@syncfusion/ej2-react-schedule';
+import React from "react";
+import {
+  ScheduleComponent,
+  Day,
+  Week,
+  WorkWeek,
+  Month,
+  Agenda,
+  Inject,
+  Resize,
+  DragAndDrop,
+} from "@syncfusion/ej2-react-schedule";
 
-
-import { scheduleData } from '../data/dummy';
-import { Header } from '../components';
-
+import { scheduleData } from "../data/dummy";
+import { Header } from "../components";
 
 const Scheduler = () => {
-  const [scheduleObj, setScheduleObj] = useState();
 
-  const change = (args) => {
-    scheduleObj.selectedDate = args.value;
-    scheduleObj.dataBind();
-  };
 
   const onDragStart = (arg) => {
-    
     arg.navigation.enable = true;
   };
 
@@ -28,10 +30,10 @@ const Scheduler = () => {
         eventSettings={{ dataSource: scheduleData }}
         dragStart={onDragStart}
       >
-        
-        <Inject services={[Day, Week, WorkWeek, Month, Agenda, Resize, DragAndDrop]} />
+        <Inject
+          services={[Day, Week, WorkWeek, Month, Agenda, Resize, DragAndDrop]}
+        />
       </ScheduleComponent>
-      
     </div>
   );
 };
