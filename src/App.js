@@ -25,17 +25,18 @@ import "./App.css";
 import { useStateContext } from "./contexts/ContextProvider";
 
 function App() {
-  const { activeMenu } = useStateContext();
+  const { activeMenu, themeSettings, setThemeSettings, currentColor,currentMode } = useStateContext();
   return (
-    <div>
+    <div className={currentMode==="Dark"?'dark':" "}>
       <BrowserRouter>
         <div className="flex relative dark:bg-main-dark-bg">
           <div className="fixed right-4 bottom-4" style={{ zIndex: "1000" }}>
-            <TooltipComponent>
+            <TooltipComponent content="Settings" position="Top">
               <button
                 type="button"
-                className="text-3xl p-3 hover:drop-shadow-xl hover:bg-light-gray text-white"
-                style={{ background: "blue", borderRadius: "50%" }}
+                className="text-2xl p-3 hover:drop-shadow-xl hover:bg-light-gray text-white"
+                style={{ background: currentColor, borderRadius: "50%" }}
+                onClick={() => setThemeSettings(true)}
               >
                 <FiSettings />
               </button>
@@ -61,35 +62,36 @@ function App() {
             <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ">
               <Navbar />
             </div>
-          </div>
 
-          <div>
-            <Routes>
-              {/* dashboard  */}
-              <Route path="/" element={<Ecommerce />} />
-              <Route path="/ecommerce" element={<Ecommerce />} />
+            <div> 
+              {themeSettings && <ThemeSettings />}
+              <Routes>
+                {/* dashboard  */}
+                <Route path="/" element={<Ecommerce />} />
+                <Route path="/ecommerce" element={<Ecommerce />} />
 
-              {/* pages  */}
-              <Route path="/orders" element={<Orders />} />
-              <Route path="/employees" element={<Employees />} />
-              <Route path="/customers" element={<Customers />} />
+                {/* pages  */}
+                <Route path="/orders" element={<Orders />} />
+                <Route path="/employees" element={<Employees />} />
+                <Route path="/customers" element={<Customers />} />
 
-              {/* apps  */}
-              <Route path="/kanban" element={<Kanban />} />
-              <Route path="/editor" element={<Editor />} />
-              <Route path="/calendar" element={<Calendar />} />
-              <Route path="/color-picker" element={<ColorPicker />} />
+                {/* apps  */}
+                <Route path="/kanban" element={<Kanban />} />
+                <Route path="/editor" element={<Editor />} />
+                <Route path="/calendar" element={<Calendar />} />
+                <Route path="/color-picker" element={<ColorPicker />} />
 
-              {/* charts  */}
-              <Route path="/line" element={<Line />} />
-              <Route path="/area" element={<Area />} />
-              <Route path="/bar" element={<Bar />} />
-              <Route path="/pie" element={<Pie />} />
-              <Route path="/financial" element={<Financial />} />
-              <Route path="/color-mapping" element={<ColorMapping />} />
-              <Route path="/pyramid" element={<Pyramid />} />
-              <Route path="/stacked" element={<Stacked />} />
-            </Routes>
+                {/* charts  */}
+                <Route path="/line" element={<Line />} />
+                <Route path="/area" element={<Area />} />
+                <Route path="/bar" element={<Bar />} />
+                <Route path="/pie" element={<Pie />} />
+                <Route path="/financial" element={<Financial />} />
+                <Route path="/color-mapping" element={<ColorMapping />} />
+                <Route path="/pyramid" element={<Pyramid />} />
+                <Route path="/stacked" element={<Stacked />} />
+              </Routes>
+            </div>
           </div>
         </div>
       </BrowserRouter>
